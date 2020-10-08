@@ -280,6 +280,13 @@ func ComposeGoGetImport(owner, repo string) string {
 	return path.Join(appURL.Host, setting.AppSubURL, url.PathEscape(owner), url.PathEscape(repo))
 }
 
+// ComposeGoDocHomeURL returns the 'home' part of go-source meta tag.
+func ComposeGoDocHomeURL(owner, repo string) string {
+	appURL, _ := url.Parse(setting.AppURL)
+
+	return path.Join(appURL.String(), url.PathEscape(owner), url.PathEscape(repo))
+}
+
 // EarlyResponseForGoGetMeta responses appropriate go-get meta with status 200
 // if user does not have actual access to the requested repository,
 // or the owner or repository does not exist at all.
@@ -587,6 +594,7 @@ func RepoAssignment() macaron.Handler {
 		if ctx.Query("go-get") == "1" {
 			ctx.Data["GoGetImport"] = ComposeGoGetImport(owner.Name, repo.Name)
 			prefix := setting.AppURL + path.Join(owner.Name, repo.Name, "src", "branch", ctx.Repo.BranchName)
+			ctx.Data["GoDocHome"] = ComposeGoDocHomeURL(owner.Name, repo.Name)
 			ctx.Data["GoDocDirectory"] = prefix + "{/dir}"
 			ctx.Data["GoDocFile"] = prefix + "{/dir}/{file}#L{line}"
 		}

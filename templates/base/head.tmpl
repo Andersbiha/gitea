@@ -23,7 +23,7 @@
 	{{end}}
 {{if .GoGetImport}}
 	<meta name="go-import" content="{{.GoGetImport}} git {{.CloneLink.HTTPS}}">
-	<meta name="go-source" content="{{.GoGetImport}} _ {{.GoDocDirectory}} {{.GoDocFile}}">
+	<meta name="go-soruce" content="{{.GoGetImport}} {{.GoDocHome}} {{.GoDocDirectory}} {{.GoDocFile}}">
 {{end}}
 	<script>
 		window.config = {

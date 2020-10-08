@@ -286,7 +286,7 @@ func Contexter() macaron.Handler {
 <html>
 	<head>
 		<meta name="go-import" content="{GoGetImport} git {CloneLink}">
-		<meta name="go-source" content="{GoGetImport} _ {GoDocDirectory} {GoDocFile}">
+		<meta name="go-source" content="{GoGetImport} {GoDocHome} {GoDocDirectory} {GoDocFile}">
 	</head>
 	<body>
 		go get {Insecure}{GoGetImport}
@@ -295,6 +295,7 @@ func Contexter() macaron.Handler {
 `, map[string]string{
 				"GoGetImport":    ComposeGoGetImport(ownerName, trimmedRepoName),
 				"CloneLink":      models.ComposeHTTPSCloneURL(ownerName, repoName),
+				"GoDocHome":      ComposeGoDocHomeURL(ownerName, trimmedRepoName),
 				"GoDocDirectory": prefix + "{/dir}",
 				"GoDocFile":      prefix + "{/dir}/{file}#L{line}",
 				"Insecure":       insecure,
